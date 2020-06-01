@@ -1,0 +1,31 @@
+class Solution {
+    
+    private static final String[] MAPPING = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+    public List<String> letterCombinations(String digits) {
+	
+        List<String> mnemonics = new ArrayList<String>();
+        char[] partialMnemonic = new char[digits.length()];
+        phoneMnemonicHelper(digits, 0, partialMnemonic, mnemonics);
+        
+        return mnemonics;
+    }
+    
+    
+    public void phoneMnemonicHelper(String digits, int digit, char[] partialMnemonic, List<String> mnemonics){
+        
+        if(digits.length() == digit){
+            mnemonics.add(new String(partialMnemonic));
+        }
+        else{
+            
+            for(int i = 0; i < MAPPING[digits.charAt(digit) - '0'].length(); ++i){
+                char c = MAPPING[digits.charAt(digit) - '0'].charAt(i);
+                
+                partialMnemonic[digit] = c;
+                
+                phoneMnemonicHelper(digits, digit+1, partialMnemonic, mnemonics);
+            }
+        }
+    }
+}

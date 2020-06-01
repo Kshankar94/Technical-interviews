@@ -8,28 +8,26 @@ class Solution {
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         
-        // System.out.println(Arrays.toString(nums1));
-        // System.out.println(Arrays.toString(nums2));
         
-        int n1p = 0, n2p = 0;
+        int index1 = 0, index2 = 0;
         
         List<Integer> result = new ArrayList<Integer>();
         
         
-        while(n1p < nums1.length && n2p < nums2.length){
+        while(index1 < nums1.length && index2 < nums2.length){
             
             
-            if((n1p == 0 || nums1[n1p] != nums1[n1p - 1]) && nums1[n1p] == nums2[n2p]){
-                result.add(nums1[n1p]);
-                n1p++;
-                n2p++; 
+            if((index1 == 0 || nums1[index1] != nums1[index1 - 1]) && nums1[index1] == nums2[index2]){
+                result.add(nums1[index1]);
+                index1++;
+                index2++; 
             }
             
-           else if(nums1[n1p] < nums2[n2p]){
-                n1p++;
+           else if(nums1[index1] < nums2[index2]){
+                index1++;
             }
             else{
-                n2p++;
+                index2++;
             }
             
         }
