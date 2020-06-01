@@ -1,0 +1,71 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        
+        /*
+        
+        */
+        
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        
+        Set<Integer> result = new HashSet<Integer>();
+        
+        int[] longerArray = nums1.clone();
+        int[] shorterArray = nums2.clone();
+        
+        if(nums2.length > nums1.length){
+            longerArray = nums2.clone();
+            shorterArray = nums1.clone();
+        }
+       
+        System.out.println(Arrays.toString(longerArray));
+        int start = 0;
+        
+        for(int i = 0; i < shorterArray.length; i++){
+            
+            int newStart = lowerBound(longerArray, start, shorterArray[i]);
+            
+            if(newStart == longerArray.length){
+                break;
+            }
+            
+            if(longerArray[newStart] == shorterArray[i]){
+                if(!result.contains(shorterArray[i])) result.add(shorterArray[i]);
+                start = newStart + 1;
+            }
+        }
+        
+       
+        //copying list to array format 
+        int[] intersections = new int[result.size()];
+        int count = 0; 
+        for(int num : result){
+            intersections[count++] = num;
+        }
+        return intersections;
+    }
+    
+    
+    
+    private int lowerBound(int[] longerArray, int start, int target){
+        
+        int lo = start;
+        int hi = longerArray.length;
+        
+        while(lo < hi){
+            
+            int mid = lo + (hi - lo)/2;
+            
+            if(target <= longerArray[mid]){
+                hi = mid;
+            }
+            else{
+                lo = mid+1;
+            }
+            
+        }
+        
+         return hi;
+        
+    }
+}
